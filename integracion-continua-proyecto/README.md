@@ -1,4 +1,4 @@
-# 🚀 Proyecto de Integración Continua – Entrega 1
+#  Proyecto de Integración Continua – Entrega 1
 
 ## 📖 Descripción
 Este proyecto implementa un **sistema de gestión de tareas** utilizando una arquitectura basada en **contenedores Docker**.  
@@ -9,7 +9,7 @@ Incluye tres servicios principales:
 
 El objetivo es demostrar la comunicación entre contenedores dentro del entorno Docker como parte de la **Entrega 1** del módulo *Énfasis Profesional I - Integración Continua* del Politécnico Grancolombiano.
 
-## 🧱 Estructura del proyecto
+##  Estructura del proyecto
 ```
 integracion-continua-proyecto/
 ├── docker-compose.yml
@@ -24,7 +24,7 @@ integracion-continua-proyecto/
 └── README.md
 ```
 
-## ⚙️ Ejecución del proyecto
+##  Ejecución del proyecto
 1. **Clonar el repositorio**
    ```bash
    git clone https://github.com/Sulay2549/integracion-continua-proyecto.git
@@ -46,7 +46,7 @@ integracion-continua-proyecto/
 Politécnico Grancolombiano – 2025  
 Módulo: Integración Continua  
 
-## 📸 Evidencias sugeridas
+##  Evidencias sugeridas
 - Captura del comando `docker ps` mostrando los tres contenedores activos.  
 - Captura del navegador con el mensaje del frontend y backend.  
 - Captura del repositorio en GitHub con la estructura del proyecto.
