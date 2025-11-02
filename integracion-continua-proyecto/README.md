@@ -1,6 +1,6 @@
 #  Proyecto de Integración Continua – Entrega 1
 
-## 📖 Descripción
+## Descripción
 Este proyecto implementa un **sistema de gestión de tareas** utilizando una arquitectura basada en **contenedores Docker**.  
 Incluye tres servicios principales:
 - **Frontend:** Aplicación web simple (HTML o Angular).  
