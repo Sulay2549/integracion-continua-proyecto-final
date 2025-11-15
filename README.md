@@ -46,7 +46,4 @@ integracion-continua-proyecto/
 Politécnico Grancolombiano – 2025  
 Módulo: Integración Continua  
 
-##  Evidencias sugeridas
-- Captura del comando `docker ps` mostrando los tres contenedores activos.  
-- Captura del navegador con el mensaje del frontend y backend.  
-- Captura del repositorio en GitHub con la estructura del proyecto.
+
