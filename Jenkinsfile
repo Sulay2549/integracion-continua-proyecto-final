@@ -7,7 +7,7 @@ pipeline {
                 docker { image 'node:lts-alpine' }
             }
             steps {
-                dir('Frontend') {
+                dir('frontend') {
                     sh 'npm install'
                     sh 'npm run build -- --configuration=production'
                 }
@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build Backend') {
             steps {
-                dir('Backend') {
+                dir('backend') {
                     sh 'python -m venv venv'
                     sh '. venv/bin/activate && pip install -r requirements.txt'
                 }
