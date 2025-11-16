@@ -7,7 +7,7 @@ pipeline {
                 docker { image 'node:lts-alpine' }
             }
             steps {
-                dir('Frontend') {
+                dir('frontend') {
                     sh 'npm cache clean --force'
                     sh 'npm install --prefix . --cache ./.npm-cache'
                     sh 'npm run build -- --configuration=production'
