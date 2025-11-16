@@ -31,11 +31,11 @@ pipeline {
                 echo 'Building and deploying Docker images...'
                 script {
                     // Construir y desplegar Frontend Docker
-                    dir('Frontend') {
+                    dir('frontend') {
                         sh 'docker build -t frontend-app .'
                     }
                     // Construir y desplegar Backend Docker
-                    dir('Backend') {
+                    dir('backend') {
                         sh 'docker build -t backend-app .'
                     }
                     // Desplegar (ejecutar) ambas imágenes
