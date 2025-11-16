@@ -39,8 +39,8 @@ pipeline {
                         sh 'docker build -t backend-app .'
                     }
                     // Desplegar (ejecutar) ambas imágenes
-                    sh 'docker-compose down || true' // Detener contenedores existentes si los hay
-                    sh 'docker-compose up -d' // Iniciar contenedores en modo detached
+                    sh 'docker compose down || true' // Detener contenedores existentes si los hay
+                    sh 'docker compose up -d' // Iniciar contenedores en modo detached
                 }
             }
         }
