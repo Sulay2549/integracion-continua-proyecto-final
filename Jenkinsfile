@@ -8,6 +8,7 @@ pipeline {
             }
             steps {
                 dir('frontend') {
+                    sh 'rm -rf node_modules package-lock.json'
                     sh 'npm cache clean --force'
                     sh 'npm install --prefix . --cache ./.npm-cache'
                     sh 'npm run build -- --configuration=production'
