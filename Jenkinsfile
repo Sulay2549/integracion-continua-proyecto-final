@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build Frontend') {
             agent {
-                docker { image 'node:lts-alpine' } // Usa una imagen Docker con Node.js
+                docker { image 'node:lts-alpine' }
             }
             steps {
                 dir('Frontend') {
