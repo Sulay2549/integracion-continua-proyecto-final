@@ -28,20 +28,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Building and deploying Docker images...'
-                script {
-                    // Construir y desplegar Frontend Docker
-                    /*dir('frontend') {
-                        sh 'docker build -t frontend-app .'
-                    }*/
-                    // Construir y desplegar Backend Docker
-                    dir('backend') {
-                        sh 'docker build -t backend-app .'
-                    }
-                    // Desplegar (ejecutar) ambas imágenes
-                    sh 'docker compose down || true' // Detener contenedores existentes si los hay
-                    sh 'docker compose up -d' // Iniciar contenedores en modo detached
-                }
+                sh 'docker compose down'
+                sh 'docker compose up -d --build'
             }
         }
     }
