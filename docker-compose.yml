@@ -38,22 +38,22 @@ services:
       - app-network
 
   # --- Servicio Frontend ---
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
-    restart: always
-    ports:
-      - "4200:4200"
-    depends_on:
-      - backend
-    networks:
-      - app-network
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    stdin_open: true
-    tty: true
+  #frontend:
+  #  build:
+  #    context: ./frontend
+  #    dockerfile: Dockerfile
+  #  container_name: frontend
+  #  restart: always
+  #  ports:
+  #    - "4200:4200"
+  #  depends_on:
+  #    - backend
+  #  networks:
+  #    - app-network
+  #  environment:
+  #    - CHOKIDAR_USEPOLLING=true
+  #  stdin_open: true
+  #  tty: true
 
 # --- Red interna para comunicación ---
 networks:

@@ -2,7 +2,7 @@ pipeline {
     agent any 
 
     stages {
-        stage('Build Frontend') {
+        /*stage('Build Frontend') {
             agent {
                 docker { image 'node:lts-alpine' }
             }
@@ -14,7 +14,7 @@ pipeline {
                     sh 'npm run build -- --configuration=production'
                 }
             }
-        }
+        }*/
         stage('Build Backend') {
             agent {
                 docker { image 'python:3.9-slim-buster' }
@@ -31,9 +31,9 @@ pipeline {
                 echo 'Building and deploying Docker images...'
                 script {
                     // Construir y desplegar Frontend Docker
-                    dir('frontend') {
+                    /*dir('frontend') {
                         sh 'docker build -t frontend-app .'
-                    }
+                    }*/
                     // Construir y desplegar Backend Docker
                     dir('backend') {
                         sh 'docker build -t backend-app .'
