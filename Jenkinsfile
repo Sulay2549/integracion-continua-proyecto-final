@@ -16,6 +16,9 @@ pipeline {
             }
         }
         stage('Build Backend') {
+            agent {
+                docker { image 'python:3.9-slim-buster' }
+            }
             steps {
                 dir('backend') {
                     sh 'python -m venv venv'
