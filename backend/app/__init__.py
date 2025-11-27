@@ -1,10 +1,22 @@
 from flask import Flask
 from flask import jsonify
 from flask_cors import CORS
+import logging
 
 def create_app():
     app = Flask(__name__)
     CORS(app)
+
+    # Configurar logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.StreamHandler()
+        ]
+    )
+    logger = logging.getLogger(__name__)
+    logger.info("Iniciando aplicación Flask...")
 
     from app.routes.tareas_routes import tareas_bp
     from app.database import get_connection # Importar aquí para test_db

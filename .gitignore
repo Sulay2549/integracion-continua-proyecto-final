@@ -9,5 +9,12 @@ __pycache__/
 *.pyc
 *.log
 .venv/
-env/
 venv/
+
+# Testing
+reports/
+htmlcov/
+.coverage
+.pytest_cache/
+*.cover
+.hypothesis/

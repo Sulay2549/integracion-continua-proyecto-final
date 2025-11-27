@@ -1,5 +1,8 @@
 from app.database import get_connection
 import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Tarea:
     def __init__(self, id=None, titulo=None, descripcion=None, estado=None, prioridad=None, fechaCreacion=None, fechaLimite=None, idProyecto=None):
@@ -19,6 +22,7 @@ class Tarea:
     def crear(data):
         conn = get_connection()
         if conn is None:
+            logger.error("No se pudo conectar a la base de datos")
             return None, "No se pudo conectar a la base de datos"
         try:
             cursor = conn.cursor()
@@ -31,13 +35,15 @@ class Tarea:
                 data.get("descripcion"),
                 data.get("estado", "Pendiente"),
                 data.get("prioridad", "Media"),
-                datetime.date.today(), # <-- Nuevo parámetro para fechaCreacion
+                datetime.date.today(),
                 data.get("fechaLimite"),
                 data.get("idProyecto")
             ))
             conn.commit()
+            logger.info(f"Tarea creada exitosamente con ID: {cursor.lastrowid}")
             return cursor.lastrowid, None
         except Exception as e:
+            logger.error(f"Error al crear tarea: {str(e)}")
             return None, str(e)
         finally:
             cursor.close()
@@ -50,6 +56,7 @@ class Tarea:
     def listar(filtros=None):
         conn = get_connection()
         if conn is None:
+            logger.error("No se pudo conectar a la base de datos")
             return None, "No se pudo conectar a la base de datos"
 
         try:
@@ -68,14 +75,15 @@ class Tarea:
                     sql += " AND descripcion LIKE %s"
                     params.append(f"%{filtros['descripcion']}%")
 
-            print("🧩 SQL ejecutado:", sql)
-            print("🧩 Parámetros:", params)
+            logger.info(f"Ejecutando consulta SQL: {sql}")
+            logger.debug(f"Parámetros: {params}")
 
             cursor.execute(sql, tuple(params))
             tareas = cursor.fetchall()
+            logger.info(f"Se encontraron {len(tareas)} tareas")
             return tareas, None
         except Exception as e:
-            print("Muestra error")
+            logger.error(f"Error al listar tareas: {str(e)}")
             return None, str(e)
         finally:
             cursor.close()
@@ -88,6 +96,7 @@ class Tarea:
     def actualizar(id_tarea, data):
         conn = get_connection()
         if conn is None:
+            logger.error("No se pudo conectar a la base de datos")
             return False, "No se pudo conectar a la base de datos"
         try:
             cursor = conn.cursor()
@@ -114,6 +123,7 @@ class Tarea:
                 params.append(data["idProyecto"])
             
             if not updates:
+                logger.warning(f"Intento de actualizar tarea {id_tarea} sin datos")
                 return False, "No hay datos para actualizar"
 
             sql = f"UPDATE tareas SET {', '.join(updates)} WHERE idTarea = %s"
@@ -121,8 +131,15 @@ class Tarea:
 
             cursor.execute(sql, tuple(params))
             conn.commit()
-            return cursor.rowcount > 0, None # Retorna True si se actualizó al menos una fila
+            
+            if cursor.rowcount > 0:
+                logger.info(f"Tarea {id_tarea} actualizada exitosamente")
+            else:
+                logger.warning(f"No se encontró la tarea {id_tarea} para actualizar")
+            
+            return cursor.rowcount > 0, None
         except Exception as e:
+            logger.error(f"Error al actualizar tarea {id_tarea}: {str(e)}")
             return False, str(e)
         finally:
             cursor.close()
@@ -135,14 +152,22 @@ class Tarea:
     def eliminar(id_tarea):
         conn = get_connection()
         if conn is None:
+            logger.error("No se pudo conectar a la base de datos")
             return False, "No se pudo conectar a la base de datos"
         try:
             cursor = conn.cursor()
             sql = "DELETE FROM tareas WHERE idTarea = %s"
             cursor.execute(sql, (id_tarea,))
             conn.commit()
-            return cursor.rowcount > 0, None # Retorna True si se eliminó al menos una fila
+            
+            if cursor.rowcount > 0:
+                logger.info(f"Tarea {id_tarea} eliminada exitosamente")
+            else:
+                logger.warning(f"No se encontró la tarea {id_tarea} para eliminar")
+            
+            return cursor.rowcount > 0, None
         except Exception as e:
+            logger.error(f"Error al eliminar tarea {id_tarea}: {str(e)}")
             return False, str(e)
         finally:
             cursor.close()

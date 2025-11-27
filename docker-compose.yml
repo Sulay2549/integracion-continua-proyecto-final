@@ -5,10 +5,10 @@ services:
     container_name: mysql_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 12345
-      MYSQL_DATABASE: integracion_continua_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
@@ -27,11 +27,11 @@ services:
     ports:
       - "5000:5000"
     environment:
-      DB_HOST: db
-      DB_USER: root
-      DB_PASSWORD: 12345
-      DB_NAME: integracion_continua_db
-      FLASK_ENV: development
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      FLASK_ENV: ${FLASK_ENV}
     depends_on:
       - db
     networks:
@@ -51,7 +51,7 @@ services:
   #  networks:
   #    - app-network
   #  environment:
-  #    - CHOKIDAR_USEPOLLING=true
+  #    - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
   #  stdin_open: true
   #  tty: true
 
