@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Api {
-  private backendUrl = 'http://localhost:5000';
+  // Construir URL dinámicamente basada en el host actual
+  private backendUrl = `http://${window.location.hostname}:5000`;
 
   constructor(private http: HttpClient) {}
 
