@@ -26,6 +26,16 @@ pipeline {
                 }
             }
         }
+        stage('Test Backend') {
+            agent {
+                docker { image 'python:3.9-slim-buster' }
+            }
+            steps {
+                dir('backend') {
+                    sh '. venv/bin/activate && python -m pytest -v'
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 sh 'docker compose down'
