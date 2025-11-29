@@ -1,7 +1,7 @@
 services:
   # --- Servicio Base de Datos ---
   db:
-    image: mysql:8.0
+    image: mariadb:10.6
     container_name: mysql_db
     restart: always
     environment:
